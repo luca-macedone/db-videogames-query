@@ -110,3 +110,50 @@
     GROUP BY videogame_id 
     ORDER BY AVG(rating) 
     ```
+
+## JOIN
+
+- 1
+    ```sql
+    SELECT DISTINCT p.* FROM players p
+    JOIN reviews r 
+    ON p.id = r.player_id 
+    ```
+
+- 2
+    ```sql
+    SELECT DISTINCT  tv.videogame_id FROM tournament_videogame tv
+    JOIN tournaments t ON tv.tournament_id = t.id 
+    WHERE t.`year` = 2016
+    ```
+
+- 3
+    ```sql
+    SELECT v.*, cv.id as 'category_id' FROM videogames v 
+    JOIN category_videogame cv ON v.id = cv.videogame_id 
+    ```
+
+- 4
+    ```sql
+    SELECT DISTINCT sh.* FROM software_houses sh  
+    JOIN videogames v ON v.software_house_id = sh.id 
+    WHERE YEAR(v.release_date) >= 2020
+    ```
+
+- 5
+    ```sql
+    SELECT av.* FROM award_videogame av  
+    JOIN videogames v ON av.videogame_id = v.id 
+    JOIN software_houses sh ON v.software_house_id = sh.id
+    ```
+
+- 6
+    ```sql
+    SELECT DISTINCT  v.*, c.*, pl.* FROM videogames v 
+    JOIN reviews r  ON r.videogame_id = v.id 
+    JOIN category_videogame cv ON cv.videogame_id = v.id 
+    JOIN categories c ON cv.category_id = c.id 
+    JOIN pegi_label_videogame plv ON plv.videogame_id = v.id 
+    JOIN pegi_labels pl ON plv.pegi_label_id = pl.id 
+    WHERE r.rating = 4 OR r.rating = 5
+    ```
