@@ -1,3 +1,5 @@
+## SELECT
+
 - 1
     ```sql
     SELECT * FROM software_houses sh 
@@ -68,4 +70,43 @@
     ```sql
     SELECT COUNT(id) as 'number' FROM videogames v 
     WHERE  v.software_house_id = 1 AND YEAR (v.release_date) = 2018
+    ```
+
+## GROUP BY
+
+- 1
+    ```sql
+    SELECT COUNT(id) as 'total', country  FROM software_houses sh 
+    GROUP BY sh.country 
+    ```
+
+- 2
+    ```sql
+    SELECT videogame_id, COUNT(id)  FROM reviews r 
+    GROUP BY videogame_id  
+    ```
+
+- 3
+    ```sql
+    SELECT pegi_label_id , COUNT(videogame_id)  FROM pegi_label_videogame plv 
+    GROUP BY pegi_label_id  
+    ```
+
+- 4
+    ```sql
+    SELECT YEAR(release_date), COUNT(id)  FROM videogames v  
+    GROUP BY YEAR(release_date) 
+    ```
+
+- 5
+    ```sql
+    SELECT device_id, COUNT(videogame_id) FROM device_videogame dv 
+    GROUP BY device_id 
+    ```
+
+- 6
+    ```sql
+    SELECT videogame_id FROM reviews r 
+    GROUP BY videogame_id 
+    ORDER BY AVG(rating) 
     ```
