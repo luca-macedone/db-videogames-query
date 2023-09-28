@@ -157,3 +157,36 @@
     JOIN pegi_labels pl ON plv.pegi_label_id = pl.id 
     WHERE r.rating = 4 OR r.rating = 5
     ```
+
+- 7
+    ```sql
+    SELECT DISTINCT v.name FROM videogames v 
+    JOIN tournament_videogame tv ON v.id = tv.videogame_id 
+    JOIN player_tournament pt ON pt.tournament_id = tv.tournament_id 
+    JOIN players p ON pt.player_id = p.id 
+    WHERE p.name LIKE 'S%'
+    ```
+
+- 8
+    ```sql
+    SELECT DISTINCT  t.city, a.name  FROM tournaments t 
+    JOIN tournament_videogame tv ON tv.tournament_id = t.id 
+    JOIN videogames v ON tv.videogame_id = v.id
+    JOIN award_videogame av ON av.videogame_id = v.id
+    JOIN awards a ON av.award_id = a.id
+    WHERE av.`year` = 2018 AND av.award_id = 1
+    ```
+
+- 9
+    ```sql
+    SELECT p.* FROM players p 
+    JOIN player_tournament pt ON pt.player_id = p.id 
+    JOIN tournaments t ON pt.tournament_id = t.id 
+    JOIN tournament_videogame tv ON tv.tournament_id = t.id
+    JOIN videogames v ON tv.videogame_id = v.id
+    JOIN award_videogame av ON av.videogame_id = v.id
+    JOIN awards a ON av.award_id = a.id 
+    WHERE a.name = "Gioco più atteso" AND av.year = 2018 AND t.`year` = 2019
+    ```
+
+
